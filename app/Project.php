@@ -340,4 +340,24 @@ class Project extends Model
     {
         Cache::forget("project-{$this->id}-has-geo-info");
     }
+
+    /**
+     * The budgets associated with this project.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function budgets()
+    {
+        return $this->hasMany(Budget::class);
+    }
+
+    /**
+     * Get the active budgets for this project.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function activeBudgets()
+    {
+        return $this->budgets()->active()->current();
+    }
 }

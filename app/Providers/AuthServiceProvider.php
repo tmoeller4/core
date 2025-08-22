@@ -19,6 +19,7 @@ class AuthServiceProvider extends ServiceProvider
      * @var array<class-string, class-string>
      */
     protected $policies = [
+        \Biigle\Budget::class => \Biigle\Policies\BudgetPolicy::class,
         \Biigle\Image::class => \Biigle\Policies\VolumeFilePolicy::class,
         \Biigle\ImageAnnotation::class => \Biigle\Policies\AnnotationPolicy::class,
         \Biigle\ImageAnnotationLabel::class => \Biigle\Policies\AnnotationLabelPolicy::class,

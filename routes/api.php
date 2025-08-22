@@ -191,6 +191,16 @@ $router->resource('projects.users', 'ProjectUserController', [
     'parameters' => ['projects' => 'id', 'users' => 'id2'],
 ]);
 
+$router->resource('projects.budgets', 'BudgetController', [
+    'only' => ['index', 'store'],
+    'parameters' => ['projects' => 'id'],
+]);
+
+$router->resource('budgets', 'BudgetController', [
+    'only' => ['show', 'update', 'destroy'],
+    'parameters' => ['budgets' => 'id'],
+]);
+
 $router->resource('roles', 'RoleController', [
     'only' => ['index', 'show'],
     'parameters' => ['roles' => 'id'],

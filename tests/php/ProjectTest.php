@@ -336,4 +336,31 @@ class ProjectTest extends ModelTestCase
         $this->model->addUserId($user->id, Role::guestId());
         $this->assertTrue(Project::accessibleBy($user)->exists());
     }
+
+    public function testBudgets()
+    {
+        $budget = \Biigle\Tests\BudgetTest::create(['project_id' => $this->model->id]);
+        $this->assertEquals($budget->id, $this->model->budgets()->first()->id);
+    }
+
+    public function testActiveBudgets()
+    {
+        $activeBudget = \Biigle\Tests\BudgetTest::create([
+            'project_id' => $this->model->id,
+            'active' => true,
+            'start_date' => now()->subDay(),
+            'end_date' => now()->addDay(),
+        ]);
+        
+        $inactiveBudget = \Biigle\Tests\BudgetTest::create([
+            'project_id' => $this->model->id,
+            'active' => false,
+            'start_date' => now()->subDay(),
+            'end_date' => now()->addDay(),
+        ]);
+        
+        $activeBudgets = $this->model->activeBudgets()->get();
+        $this->assertTrue($activeBudgets->contains($activeBudget));
+        $this->assertFalse($activeBudgets->contains($inactiveBudget));
+    }
 }
