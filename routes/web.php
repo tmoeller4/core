@@ -249,6 +249,16 @@ $router->group(['namespace' => 'Views', 'middleware' => 'auth'], function ($rout
             'as'   => 'project-members',
             'uses' => 'ProjectUserController@show',
         ]);
+
+        $router->get('{id}/budgets', [
+            'as'   => 'project-budgets',
+            'uses' => 'BudgetController@index',
+        ]);
+
+        $router->get('{id}/budgets/create', [
+            'as'   => 'project-budgets-create',
+            'uses' => 'BudgetController@create',
+        ]);
     });
 
     $router->group(['namespace' => 'Volumes', 'prefix' => 'volumes'], function ($router) {
@@ -288,6 +298,18 @@ $router->group(['namespace' => 'Views', 'middleware' => 'auth'], function ($rout
         // Legacy support.
         $router->redirect('annotate/{id}', '/images/{id}/annotations');
         $router->redirect('annotations/{id}', '/image-annotations/{id}');
+    });
+
+    $router->group(['namespace' => 'Projects'], function ($router) {
+        $router->get('budgets/{id}', [
+            'as'   => 'budget-show',
+            'uses' => 'BudgetController@show',
+        ]);
+
+        $router->get('budgets/{id}/edit', [
+            'as'   => 'budget-edit',
+            'uses' => 'BudgetController@edit',
+        ]);
     });
 
     $router->group(['namespace' => 'Videos'], function ($router) {

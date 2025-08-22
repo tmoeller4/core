@@ -33,6 +33,13 @@
                 Learn what projects are and how to manage them.
             </p>
 
+            <h4>
+                <a href="{{route('manual-tutorials', ['budgets', 'about'])}}">Budget Management</a>
+            </h4>
+            <p>
+                Learn how to create and manage budgets for your projects.
+            </p>
+
 
             <h3>Label Trees</h3>
             <h4>
